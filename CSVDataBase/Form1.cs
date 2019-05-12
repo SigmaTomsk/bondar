@@ -47,7 +47,7 @@ namespace CSVDataBase
             string fl = csv.ReadLine(), // fl - FirstLine
                    columns = "";
 
-            fl = fl.Replace("\"", "");
+            fl = fl.Replace("\"", "").Replace("(", "").Replace(")", "");
 
             switch (comboBox1.SelectedIndex)
             {
@@ -101,10 +101,11 @@ namespace CSVDataBase
                         clear_garbage(data);
 
                         command.CommandText = "INSERT INTO " + tableName + "  (" + values.Replace("@", "") + ") VALUES (" + values + ")";
-                        SQLiteParameter[] param = new SQLiteParameter[values.Length];
+                        SQLiteParameter[] param = new SQLiteParameter[data.Length];
                         for (int j = 0; j < data.Length; j++) command.Parameters.AddWithValue(elements[j].ToString(), data[j]);
-                        
+
                         SQLiteDataReader reader = command.ExecuteReader();
+
                         command.Reset();
                         command.ExecuteNonQuery();
                     }
