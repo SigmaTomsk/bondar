@@ -43,9 +43,16 @@ namespace CSVDataBase
         private void button2_Click(object sender, EventArgs e)
         {
             connection.Close();
+
+            StreamReader ccsv = new StreamReader(direct);
+            string col = ccsv.ReadToEnd();
+            ccsv.Close();
+            string[] countOfColumns = col.Split('\n');
+
             StreamReader csv = new StreamReader(direct);
             string fl = csv.ReadLine(), // fl - FirstLine
                    columns = "";
+            
 
             fl = fl.Replace("\"", "").Replace("(", "").Replace(")", "");
 
@@ -57,7 +64,7 @@ namespace CSVDataBase
                 break; // deniro
 
                 case 1:
-                    columns = "Index, Living Space sq ft, Beds, Baths, Zip, Year, List Price $";
+                    columns = "Iindex, Living Space sq ft, Beds, Baths, Zip, Year, List Price $";
                     tableName = "zillow";
                 break; // zillow
 
@@ -80,38 +87,42 @@ namespace CSVDataBase
             if (fl == columns)
             {
                 connection.Open();
-                    command.Connection = connection;
-                    string[] elements = columns.Split(',');
-                    string values = "@";
+                command.Connection = connection;
 
-                    for (int p = 1; p < elements.Length; p++) elements[p] = elements[p].Substring(1, elements[p].Length - 1);
-                    for (int g = 0; g < elements.Length; g++) elements[g] = elements[g].Replace(" ", "_");
+                command.CommandText = "Delete from " + tableName + "; Reindex " + tableName + "; Vacuum;";
+                command.ExecuteNonQuery();
 
-                    for (int i = 0; i < elements.Length; i++)
-                    {
-                        if (i != elements.Length - 1) values += elements[i] + ", @";
-                        else values += elements[i];
-                    }
+                string[] elements = columns.Split(',');
+                string values = "@";
 
-                    for (int i = 0; i < elements.Length; i++)
-                    {
-                        string a = csv.ReadLine();
-                        string[] data = a.Split(',');
-                       
-                        clear_garbage(data);
+                for (int p = 1; p < elements.Length; p++) elements[p] = elements[p].Substring(1, elements[p].Length - 1);
+                for (int g = 0; g < elements.Length; g++) elements[g] = elements[g].Replace(" ", "_");
 
-                        command.CommandText = "INSERT INTO " + tableName + "  (" + values.Replace("@", "") + ") VALUES (" + values + ")";
-                        SQLiteParameter[] param = new SQLiteParameter[data.Length];
-                        for (int j = 0; j < data.Length; j++) command.Parameters.AddWithValue(elements[j].ToString(), data[j]);
+                for (int i = 0; i < elements.Length; i++)
+                {
+                    if (i != elements.Length - 1) values += elements[i] + ", @";
+                    else values += elements[i];
+                }
 
-                        SQLiteDataReader reader = command.ExecuteReader();
-
-                        command.Reset();
-                        command.ExecuteNonQuery();
-                    }
-                    MessageBox.Show("Операция прошла успешно", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                int coool = countOfColumns.Length - 2;
+                for (int i = 0; i < coool; i++)
+                {
+                    string a = csv.ReadLine();
+                    string[] data = a.Split(','); ;
                     
-                    connection.Close();
+                    clear_garbage(data);
+                        
+                    command.CommandText = "INSERT INTO " + tableName + " (" + values.Replace("@", "") + ") VALUES (" + values + ")";
+
+                    SQLiteParameter[] param = new SQLiteParameter[data.Length];
+                    for (int j = 0; j < data.Length; j++) command.Parameters.AddWithValue(elements[j].ToString(), data[j]);
+                    
+                    command.Reset();
+                    command.ExecuteNonQuery();
+                }
+                MessageBox.Show("Операция прошла успешно", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                connection.Close();
                 
             }
             else
