@@ -20,8 +20,6 @@ namespace _2048
     /// </summary>
     public partial class MainWindow : Window
     {
-        bool changeLocation = false, @try = false;
-        double Sx = 0, Sy = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,43 +34,16 @@ namespace _2048
         {
             this.WindowState = WindowState.Minimized;
         }
-
-        private void Window_MouseMove(object sender, MouseEventArgs e)
+        
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if(changeLocation)
-            {
-                if (@try)
-                {
-                    double y = e.GetPosition(null).Y - Sy;
-                    double x = e.GetPosition(null).X - Sx;
-
-                    this.Left = x;
-                    this.Top = y;
-                    @try = false;
-                }
-                else @try = true;
-            }
+            this.DragMove();
         }
 
-        private void Grid_MouseRightButtonUp(object sender, MouseEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Sx = 0;
-            Sy = 0;
-            changeLocation = false;
-        }
-
-        private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Sx = e.GetPosition(null).X - this.Top;
-            Sy = e.GetPosition(null).Y - this.Left;
-            changeLocation = true;
-        }
-
-        private void Grid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Sx = 0;
-            Sy = 0;
-            changeLocation = false;
+            scoreText.Content = "100";
+            theBestText.Content = "20343";
         }
     }
 }

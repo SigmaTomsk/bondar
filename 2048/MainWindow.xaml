@@ -5,16 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2048"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="400" WindowStyle="None" ResizeMode="NoResize" MouseMove="Window_MouseMove" MouseDown="Grid_MouseRightButtonDown" MouseUp="Grid_MouseRightButtonUp" MouseLeave="Grid_MouseRightButtonUp">
+        Title="MainWindow" Height="498" Width="382" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Window_MouseLeftButtonDown" Background="#FF3B3B3B">
 
     <Grid HorizontalAlignment="Left" Height="5" VerticalAlignment="Top" Width="400" Background="#FFF8AF42">
-        <Grid HorizontalAlignment="Left" Height="29" Margin="0,5,0,-29" VerticalAlignment="Top" Width="400" Background="#FF211E1F" MouseMove="Window_MouseMove">
+        <Grid HorizontalAlignment="Left" Height="29" Margin="0,5,0,-29" VerticalAlignment="Top" Width="400" Background="#FF211E1F">
 
-            <Button x:Name="exit_button" Content="✖" HorizontalAlignment="Left" Height="29" Margin="370,-1,0,0" VerticalAlignment="Top" Width="29" Click="exit_button_Click" FontFamily="Showcard Gothic" FontSize="12" Foreground="White" Background="#00DDDDDD" BorderThickness="0">
+            <Button x:Name="exit_button" Content="✖" HorizontalAlignment="Left" Height="29" Margin="349,-1,0,0" VerticalAlignment="Top" Width="29" Click="exit_button_Click" FontFamily="Showcard Gothic" FontSize="12" Foreground="White" Background="#00DDDDDD" BorderThickness="0">
             </Button>
             <Label Content="2048" HorizontalAlignment="Left" Margin="5,-2,0,0" VerticalAlignment="Top" Height="30" Width="109" FontWeight="Bold" FontFamily="Franklin Gothic Heavy" Foreground="White" FontSize="20"/>
 
         </Grid>
-        <Button Content="—" HorizontalAlignment="Left" Height="30" Margin="339,4,0,-29" VerticalAlignment="Top" Width="30" Click="Button_Click" FontFamily="Showcard Gothic" FontSize="18" Foreground="White" Background="#00DDDDDD" BorderThickness="0" FontWeight="Bold"/>
+        <Button Content="—" HorizontalAlignment="Left" Height="30" Margin="317,4,0,-29" VerticalAlignment="Top" Width="30" Click="Button_Click" FontFamily="Showcard Gothic" FontSize="18" Foreground="White" Background="#00DDDDDD" BorderThickness="0" FontWeight="Bold"/>
+        <Grid HorizontalAlignment="Left" Height="68" Margin="7,40,0,-103" VerticalAlignment="Top" Width="80" Background="#FFF8AF42"/>
+        <Grid HorizontalAlignment="Left" Height="64" Margin="9,42,0,-101" VerticalAlignment="Top" Width="76" Background="#FF3B3B3B">
+            <Label x:Name="scoreTableText" Content="Score" HorizontalAlignment="Center" Margin="2,4,3,0" VerticalAlignment="Top" Height="31" Width="71" FontWeight="Bold" FontFamily="Franklin Gothic Heavy" Foreground="White" FontSize="20" HorizontalContentAlignment="Center"/>
+            <Label x:Name="scoreText" Content="100" HorizontalAlignment="Center" Margin="2,30,3,0" VerticalAlignment="Top" Height="31" Width="71" FontWeight="Bold" FontFamily="Franklin Gothic Heavy" Foreground="White" FontSize="20" HorizontalContentAlignment="Center"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="68" Margin="100,40,0,-103" VerticalAlignment="Top" Width="97" Background="#FFF8AF42"/>
+        <Grid HorizontalAlignment="Left" Height="64" Margin="102,42,0,-101" VerticalAlignment="Top" Width="93" Background="#FF3B3B3B">
+            <Label x:Name="theBestTable" Content="The Best" HorizontalAlignment="Left" Margin="1,4,-1,0" VerticalAlignment="Top" Height="29" Width="93" FontWeight="Bold" FontFamily="Franklin Gothic Heavy" Foreground="White" FontSize="20"/>
+            <Label x:Name="theBestText" Content="23488" HorizontalAlignment="Center" Margin="3,30,0,0" VerticalAlignment="Top" Height="29" Width="87" FontWeight="Bold" FontFamily="Franklin Gothic Heavy" Foreground="White" FontSize="20" HorizontalContentAlignment="Center"/>
+            <Label x:Name="theBestTable_Copy" Content="2048" HorizontalAlignment="Center" Margin="104,4,-179,0" VerticalAlignment="Top" Height="55" Width="168" FontWeight="Bold" FontFamily="Franklin Gothic Heavy" Foreground="White" FontSize="48" HorizontalContentAlignment="Center"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="374" Margin="7,117,0,-486" VerticalAlignment="Top" Width="368" Background="#FFEBC2AF">
+            <Grid HorizontalAlignment="Left" Height="80" Margin="8,10,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="98,10,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="188,10,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="278,10,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="8,101,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="98,101,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="188,101,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="278,101,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="8,192,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="98,192,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="188,192,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="278,192,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="8,283,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="98,283,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="188,283,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="278,283,0,0" VerticalAlignment="Top" Width="80" Background="#FFF2DDC6"/>
+        </Grid>
     </Grid>
 </Window>
