@@ -16,6 +16,7 @@ namespace parser
     {
         public Label lb;
         public PictureBox pb;
+        public Label llb;
 
         public Form1()
         {
@@ -112,35 +113,74 @@ namespace parser
                 var allCounts = CountModule.FindElements(By.ClassName("page_counter"));
 
                 int k = 0;
-                List<string> res = new List<string>();
+                List<string> resNum = new List<string>();
+                List<string> resTxt = new List<string>();
+
                 foreach (IWebElement abc in allCounts)
                 {
                     char[] txt = abc.Text.ToCharArray();
                     
-                    res.Add("");
+                    resNum.Add("");
+                    resTxt.Add("");
+                    int num = 0;
 
                     for(int i = 0; i < txt.Length; i++)
                     {
-                        if (txt[i] != '\r' && txt[i] != '\n') res[k] += txt[i].ToString();
+                        if (txt[i] != '\r' && txt[i] != '\n') resNum[k] += txt[i].ToString();
+                        else if(num != 2) num++;
+                        else if (num == 2 && txt[i] != '\r' && txt[i] != '\n') resTxt[k] += txt[i].ToString();
                         else break;
                     }
 
                     k++;
                 }
-                if (res[0] != "") label1.Text = "Общих друзей: " + res[0];
-                else label1.Text = "Общих друзей: 0 (либо данные скрыты)";
-                
-                if (res[1] != "") label2.Text = "Друзей: " + res[1];
-                else label2.Text = "Друзей: 0 (либо данные скрыты)";
-                
-                if (res[2] != "") label3.Text = "Подписчиков: " + res[2];
-                else label3.Text = "Подписчиков: 0 (либо данные скрыты)";
-                
-                if (res[3] != "") label4.Text = "Фотографий: " + res[3];
-                else label4.Text = "Фотографий: 0 (либо данные скрыты)";
-                
-                if (res[4] != "") label5.Text = "Отметок: " + res[4];
-                else label5.Text = "Отметок: 0 (либо данные скрыты)";
+
+                for(int i = 0; i < resNum.Count; i++)
+                {
+                    char[] gh = resNum[i].ToCharArray();
+                    resNum[i] = "";
+
+                    for(int g = 0; g < gh.Length; g++)
+                    {
+                        if(char.IsDigit(gh[g]))
+                        {
+                            resNum[i] += gh[g].ToString();
+                        }
+                        else if(char.IsLetter(gh[i]))
+                        {
+                            resTxt[i] += gh[g].ToString();
+                        }
+                    }
+
+                }
+
+
+                /* for(int i = 0; i < resNum.Count; i++)
+                 {
+                     int forName = 1;
+                     int x = 180, y = 130;
+
+                     if(resNum[i] != "")
+                     {
+
+                     }
+                     else
+                     {
+                         this.llb = new Label()
+                         {
+                             Name = "lbFriend" + forName.ToString(),
+                             Location = new Point(x, y + 90),
+                             AutoSize = false,
+                             Text = resNum[i].Text,
+                             Tag = name.GetAttribute("href"),
+                             Cursor = Cursors.Hand
+                         };
+                     }
+
+                     y += 15;
+                     forName++;
+                 }*/
+
             }
             catch (Exception exp)
             {
